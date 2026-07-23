@@ -3,6 +3,7 @@ import type { CSSProperties } from 'react'
 import type { AgentTask } from '../../hooks/useAgentSimulation'
 import type { MetricUnit } from '../../hooks/neuralMetrics'
 import { useLocaleText } from '../../ui/locale'
+import { getAgentPhaseLabelKey } from '../../ui/runtime-state-presentation'
 
 interface RightMetricsPanelProps {
   task: AgentTask
@@ -34,7 +35,7 @@ export function RightMetricsPanel({ task }: RightMetricsPanelProps) {
 
   return (
     <aside className="right-metrics-panel" data-reveal="metrics" data-phase={task.phase}>
-      <div className="metrics-heading"><span>{t('metrics.title')}</span><span className="metrics-live-state">{task.phase.replace('-', ' ')}</span><i /></div>
+      <div className="metrics-heading"><span>{t('metrics.title')}</span><span className="metrics-live-state">{t(getAgentPhaseLabelKey(task.phase))}</span><i /></div>
       {metrics.map((metric, index) => (
         <section className="metric-block" key={metric.label} style={{ '--metric-index': index } as CSSProperties}>
           <p>{metric.label}</p>

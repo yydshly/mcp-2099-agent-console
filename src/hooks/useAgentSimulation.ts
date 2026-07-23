@@ -28,23 +28,26 @@ export function useAgentSimulation() {
   }, [runtime])
 
   const retryTask = useCallback(() => {
-    if (runtime.activeTask) void runtime.actOnTask(runtime.activeTask.id, { requestId: requestId(), action: 'retry' })
+    if (!runtime.activeTask) return Promise.resolve()
+    return runtime.actOnTask(runtime.activeTask.id, { requestId: requestId(), action: 'retry' })
   }, [runtime])
 
   const approveTask = useCallback((taskId: string) => {
-    void runtime.actOnTask(taskId, { requestId: requestId(), action: 'approve' })
+    return runtime.actOnTask(taskId, { requestId: requestId(), action: 'approve' })
   }, [runtime])
 
   const rejectTask = useCallback((taskId: string) => {
-    void runtime.actOnTask(taskId, { requestId: requestId(), action: 'reject' })
+    return runtime.actOnTask(taskId, { requestId: requestId(), action: 'reject' })
   }, [runtime])
 
   const pauseTask = useCallback(() => {
-    if (runtime.activeTask) void runtime.actOnTask(runtime.activeTask.id, { requestId: requestId(), action: 'pause' })
+    if (!runtime.activeTask) return Promise.resolve()
+    return runtime.actOnTask(runtime.activeTask.id, { requestId: requestId(), action: 'pause' })
   }, [runtime])
 
   const resumeTask = useCallback(() => {
-    if (runtime.activeTask) void runtime.actOnTask(runtime.activeTask.id, { requestId: requestId(), action: 'resume' })
+    if (!runtime.activeTask) return Promise.resolve()
+    return runtime.actOnTask(runtime.activeTask.id, { requestId: requestId(), action: 'resume' })
   }, [runtime])
 
   const cancelTask = useCallback(() => {

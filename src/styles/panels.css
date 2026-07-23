@@ -45,7 +45,8 @@
 }
 
 .locale-toggle {
-  min-width: 38px;
+  gap: 6px;
+  min-width: 52px;
   min-height: 30px;
   padding: 0 8px;
   border: 1px solid var(--control-border);
@@ -71,6 +72,11 @@
   color: var(--success);
 }
 
+.quality-toggle.is-constrained {
+  border-color: color-mix(in srgb, var(--success) 52%, var(--control-border));
+  color: var(--success);
+}
+
 .top-navigation .nav-actions > button {
   display: inline-flex;
   align-items: center;
@@ -82,11 +88,57 @@
   line-height: 1;
 }
 
-.top-navigation .nav-actions > .icon-control,
-.top-navigation .nav-actions > .locale-toggle {
+.top-navigation .nav-actions > .icon-control {
   width: 36px;
   min-width: 36px;
   padding: 0;
+}
+
+.workspace-menu { position: relative; display: none; }
+
+.workspace-menu-trigger {
+  gap: 5px;
+  min-height: 36px;
+  padding: 0 8px;
+  border: 1px solid var(--control-border);
+  background: var(--surface-control);
+  color: var(--text-muted);
+  font: 700 8px var(--font-console);
+  letter-spacing: .06em;
+}
+
+.workspace-menu-list {
+  position: absolute;
+  z-index: 45;
+  top: calc(100% + 8px);
+  right: 0;
+  display: grid;
+  min-width: 148px;
+  padding: 5px;
+  border: 1px solid var(--panel-border);
+  background: var(--surface-panel);
+  box-shadow: var(--panel-shadow);
+}
+
+.workspace-menu-list button {
+  min-height: 31px;
+  padding: 0 9px;
+  border: 0;
+  background: transparent;
+  color: var(--text-muted);
+  font: 700 8px var(--font-console);
+  letter-spacing: .07em;
+  text-align: left;
+}
+
+.workspace-menu-list button:hover,
+.workspace-menu-list button.is-active {
+  background: color-mix(in srgb, var(--accent) 11%, transparent);
+  color: var(--accent);
+}
+
+@media (max-width: 1024px) {
+  .workspace-menu { display: block; }
 }
 
 .top-navigation .nav-actions > .command-hint,
@@ -95,6 +147,14 @@
 .top-navigation .nav-actions > .console-trigger,
 .top-navigation .nav-actions > .initialize-control {
   min-height: 36px;
+}
+
+.top-navigation .nav-actions > :is(.quality-toggle, .visual-toggle, .locale-toggle, .console-trigger) {
+  gap: 6px;
+}
+
+.top-navigation .nav-actions > :is(.quality-toggle, .visual-toggle, .locale-toggle, .console-trigger) svg {
+  flex: 0 0 auto;
 }
 
 .top-navigation .visual-toggle.instant-tooltip { overflow: visible; }
@@ -139,10 +199,10 @@
     width: 34px;
     justify-content: center;
     padding-inline: 0;
-    overflow: hidden;
-    color: transparent;
     gap: 0;
   }
+
+  .quality-toggle > span { display: none; }
 
   .quality-toggle svg {
     flex: 0 0 auto;
@@ -211,6 +271,13 @@
   margin: 0;
   color: var(--danger);
   font: 8px/1.45 var(--font-console);
+  letter-spacing: .06em;
+}
+
+.history-export-feedback {
+  margin: 6px 0 0;
+  color: var(--success);
+  font: 8px/1.35 var(--font-console);
   letter-spacing: .06em;
 }
 
@@ -315,7 +382,7 @@
 
   .top-navigation .locale-toggle {
     flex: 0 0 auto;
-    min-width: 40px;
+    min-width: 52px;
   }
 
   .operation-confirm-gate,
@@ -344,6 +411,12 @@
   .top-navigation .nav-actions {
     gap: 4px !important;
   }
+
+  .top-navigation .main-navigation { display: none !important; }
+
+  .workspace-menu-trigger span { display: none; }
+
+  .workspace-menu-trigger { width: 36px; padding: 0; }
 
   .top-navigation .icon-control {
     display: none !important;
@@ -381,12 +454,12 @@
   }
 
   .mission-timeline {
-    top: 76px !important;
+    top: auto !important;
     right: 14px !important;
-    bottom: auto !important;
+    bottom: 50px !important;
     left: 14px !important;
     width: auto !important;
-    max-height: 29dvh !important;
+    max-height: 24dvh !important;
     overflow-y: auto;
   }
 

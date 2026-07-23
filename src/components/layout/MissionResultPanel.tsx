@@ -32,7 +32,9 @@ export function MissionResultPanel({ snapshot, profiles = [], extensionRegistry 
     const file = [t('result.fileTitle'), `TASK: ${snapshot.id}`, t('result.fileStatus'), '', result.summary, ...details.map((detail) => `- ${detail}`)].join('\n')
     const url = URL.createObjectURL(new Blob([file], { type: 'text/plain;charset=utf-8' }))
     const link = document.createElement('a')
-    link.href = url; link.download = 'mcp-2099-mission-result.txt'; link.click(); URL.revokeObjectURL(url)
+    link.href = url; link.download = 'mcp-2099-mission-result.txt'; document.body.append(link); link.click(); link.remove()
+    window.setTimeout(() => URL.revokeObjectURL(url), 0)
+    setActionFeedback(t('result.exported'))
   }
   const requestAction = async (actionId: string, label: string) => {
     setActionStates((current) => setResultActionStatus(current, actionId, 'requesting'))
@@ -40,6 +42,7 @@ export function MissionResultPanel({ snapshot, profiles = [], extensionRegistry 
     try {
       await onAction?.(actionId, label)
       setActionStates((current) => setResultActionStatus(current, actionId, 'requested'))
+      setActionFeedback(`${label.toUpperCase()} / ${t('result.requested')}`)
     } catch {
       setActionStates((current) => setResultActionStatus(current, actionId, 'failed'))
       setActionFeedback(`${label.toUpperCase()} / ${t('confirm.error')}`)
