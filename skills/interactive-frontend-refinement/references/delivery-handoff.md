@@ -1,5 +1,13 @@
 # Delivery and Handoff
 
+## Pre-Implementation Gate
+
+Before implementation begins, reference-led, brief-led, and repair-led work
+must have a design contract defining the primary journey, acceptance criteria,
+affected states and surfaces, and support boundaries. If the contract is
+absent, stop and obtain it before changing the implementation; readiness and
+delivery checks cannot retroactively replace this gate.
+
 ## Product Readiness
 
 Product readiness means the declared primary journey satisfies the agreed
@@ -10,6 +18,10 @@ complete merely because the implementation looks plausible in source.
 When the page can run, use real browser evidence before claiming visual or
 interaction completion. Record the journey, states, Viewport coverage, and
 any accepted boundaries or unsupported environments.
+
+An operable capability fallback requires runnable browser or devtools evidence.
+If it cannot be exercised, record the verification as pending; documentation
+may describe the environment boundary but cannot count as completion evidence.
 
 ## Engineering Validation
 

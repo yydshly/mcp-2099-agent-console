@@ -5,6 +5,15 @@ refinement is complete. It applies to reference-led, brief-led, and repair-led
 work. Select checks from the local matrix first; use the full delivery matrix
 when the changed scope or declared journey requires it.
 
+## Pre-Implementation Gate
+
+Before implementation begins in reference-led, brief-led, or repair-led work,
+create or confirm a design contract that names the declared primary journey,
+acceptance criteria, affected states and surfaces, and supported boundaries.
+Without that contract, stop refinement and obtain it; do not begin an
+implementation change or substitute a visual guess for an acceptance
+criterion.
+
 ## Local Adjacent Checks
 
 | Change category | Local adjacent checks | Evidence to capture |
@@ -36,7 +45,7 @@ interaction claims.
 | Foreground | Open/close/Escape/focus work for dialogs, menus, popovers, and other foreground layers | Browser interaction evidence, including focus return |
 | Locale | Locale and control width accommodate translated labels, formatted values, and input affordances | Locale screenshot and measured/witnessed width behavior |
 | Motion | Reduced motion removes or replaces nonessential motion without hiding information | Browser or OS preference evidence |
-| Capability | Capability fallback remains usable when the enhanced API, media, or rendering path is unavailable | Browser/devtools observation or documented runtime fallback |
+| Capability | Capability fallback remains usable when the enhanced API, media, or rendering path is unavailable | Browser/devtools evidence of an operable fallback when runnable; otherwise mark verification pending. Documentation may record an environment boundary, never completion evidence. |
 | Performance | High-cost visuals do not make the primary journey perceptibly slower; inspect loading and animation cost when their scope changed | Performance observation appropriate to the changed asset or effect |
 
 ## Selection Rules
