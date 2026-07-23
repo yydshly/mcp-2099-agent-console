@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mcp-2099.local/contracts/agent-platform/v1/task-result.schema.json",
+  "title": "TaskResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["summary", "data", "evidence", "artifacts", "actions"],
+  "properties": {
+    "summary": { "type": "string", "minLength": 1, "maxLength": 8000 },
+    "data": { "type": "object", "additionalProperties": true },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["label", "source"],
+        "properties": {
+          "label": { "type": "string", "minLength": 1 },
+          "source": { "type": "string", "minLength": 1 },
+          "url": { "type": "string", "format": "uri" }
+        }
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "name", "mediaType"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "name": { "type": "string", "minLength": 1 },
+          "mediaType": { "type": "string", "minLength": 1 },
+          "url": { "type": "string", "format": "uri" }
+        }
+      }
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "label"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "label": { "type": "string", "minLength": 1 },
+          "kind": { "enum": ["primary", "secondary", "danger"] }
+        }
+      }
+    }
+  }
+}

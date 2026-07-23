@@ -1,0 +1,17 @@
+:root {
+  --font-display: Inter, 'Segoe UI', sans-serif;
+  --font-console: 'JetBrains Mono', monospace;
+  --accent: #ff6a1a;
+  --accent-strong: #ff7a00;
+  --success: #62d98b;
+  --warning: #e6aa53;
+  --danger: #e76b51;
+  --focus-ring: #ff8a3d;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --panel-shadow: 0 18px 58px rgba(0, 0, 0, .34);
+  --control-height: 34px;
+  --close-control-size: 32px;
+}

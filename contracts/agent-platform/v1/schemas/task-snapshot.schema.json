@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mcp-2099.local/contracts/agent-platform/v1/task-snapshot.schema.json",
+  "title": "TaskSnapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "profileId", "status", "progress", "input", "options", "agents", "createdAt", "updatedAt", "version"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "profileId": { "type": "string", "minLength": 1 },
+    "workflowId": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["queued", "running", "paused", "waiting_approval", "completed", "failed", "cancelled"] },
+    "progress": { "type": "number", "minimum": 0, "maximum": 100 },
+    "input": { "type": "object", "additionalProperties": true },
+    "options": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["priority", "approvalPolicy"],
+      "properties": {
+        "priority": { "enum": ["standard", "high", "urgent"] },
+        "approvalPolicy": { "enum": ["auto", "required"] }
+      }
+    },
+    "agents": { "type": "array", "items": { "$ref": "agent-run.schema.json" } },
+    "result": { "$ref": "task-result.schema.json" },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "version": { "type": "integer", "minimum": 1 }
+  }
+}

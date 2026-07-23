@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mcp-2099.local/contracts/agent-platform/v1/audit-record.schema.json",
+  "title": "AuditRecord",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "occurredAt", "actor", "type", "message", "tone"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "occurredAt": { "type": "string", "format": "date-time" },
+    "actor": { "type": "string", "minLength": 1 },
+    "type": { "type": "string", "minLength": 1 },
+    "message": { "type": "string", "minLength": 1 },
+    "tone": { "enum": ["info", "success", "warning", "danger"] },
+    "taskId": { "type": "string" },
+    "metadata": { "type": "object", "additionalProperties": true }
+  }
+}

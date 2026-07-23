@@ -1,0 +1,41 @@
+{
+  "id": "customer-refund",
+  "version": "1.0.0",
+  "name": "Customer refund fixture",
+  "description": "A profile fixture used only to validate generic multi-agent contract extension behavior.",
+  "inputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["customerId", "orderId", "request", "channel"],
+    "properties": {
+      "customerId": { "type": "string", "minLength": 1 },
+      "orderId": { "type": "string", "minLength": 1 },
+      "request": { "type": "string", "minLength": 1 },
+      "channel": { "enum": ["email", "chat", "phone", "portal"] }
+    }
+  },
+  "uiSchema": {
+    "sections": ["customer", "request", "policy"]
+  },
+  "resultSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["decision", "responseDraft"],
+    "properties": {
+      "decision": { "enum": ["approved", "rejected", "escalated"] },
+      "responseDraft": { "type": "string" }
+    }
+  },
+  "workflow": {
+    "id": "refund-resolution",
+    "version": "1.0.0",
+    "allowedRoles": ["context-retrieval", "policy-validation", "response-synthesis", "approval-coordination"]
+  },
+  "metrics": [
+    { "id": "policyConfidence", "label": "Policy confidence", "unit": "percent" }
+  ],
+  "actions": [
+    { "id": "send-response", "label": "Send response" },
+    { "id": "create-ticket", "label": "Create ticket" }
+  ]
+}

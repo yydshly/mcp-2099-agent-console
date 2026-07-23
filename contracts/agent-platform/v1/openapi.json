@@ -1,0 +1,218 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Agent Platform API",
+    "version": "1.0.0"
+  },
+  "servers": [{ "url": "/" }],
+  "security": [{ "bearerAuth": [] }],
+  "paths": {
+    "/v1/profiles": {
+      "get": {
+        "operationId": "listProfiles",
+        "responses": {
+          "200": {
+            "description": "Profiles",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "./schemas/agent-profile.schema.json" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/profiles/{profileId}": {
+      "get": {
+        "operationId": "getProfile",
+        "parameters": [{ "$ref": "#/components/parameters/ProfileId" }],
+        "responses": {
+          "200": {
+            "description": "Profile",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "./schemas/agent-profile.schema.json" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/v1/tasks": {
+      "get": {
+        "operationId": "listTasks",
+        "responses": {
+          "200": {
+            "description": "Tasks",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "./schemas/task-snapshot.schema.json" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createTask",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "./schemas/task-request.schema.json" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Task accepted",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "./schemas/task-snapshot.schema.json" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" }
+        }
+      }
+    },
+    "/v1/tasks/{taskId}": {
+      "get": {
+        "operationId": "getTask",
+        "parameters": [{ "$ref": "#/components/parameters/TaskId" }],
+        "responses": {
+          "200": {
+            "description": "Task",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "./schemas/task-snapshot.schema.json" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/v1/tasks/{taskId}/actions": {
+      "post": {
+        "operationId": "actOnTask",
+        "parameters": [{ "$ref": "#/components/parameters/TaskId" }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "./schemas/task-action.schema.json" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated task",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "./schemas/task-snapshot.schema.json" }
+              }
+            }
+          },
+          "409": { "description": "Action is not valid for current task state" }
+        }
+      }
+    },
+    "/v1/tasks/{taskId}/events": {
+      "get": {
+        "operationId": "streamTaskEvents",
+        "parameters": [{ "$ref": "#/components/parameters/TaskId" }],
+        "responses": {
+          "200": {
+            "description": "Server-Sent Events",
+            "content": {
+              "text/event-stream": {
+                "schema": { "$ref": "./schemas/agent-event.schema.json" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/tasks/{taskId}/logs": {
+      "get": {
+        "operationId": "listTaskLogs",
+        "parameters": [{ "$ref": "#/components/parameters/TaskId" }],
+        "responses": {
+          "200": {
+            "description": "Task events",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "./schemas/agent-event.schema.json" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/queue": {
+      "get": {
+        "operationId": "getQueue",
+        "responses": { "200": { "description": "Queue snapshot", "content": { "application/json": { "schema": { "$ref": "./schemas/queue-snapshot.schema.json" } } } } }
+      }
+    },
+    "/v1/queue/actions": {
+      "post": {
+        "operationId": "actOnQueue",
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "./schemas/queue-action.schema.json" } } } },
+        "responses": { "200": { "description": "Updated queue", "content": { "application/json": { "schema": { "$ref": "./schemas/queue-snapshot.schema.json" } } } } }
+      }
+    },
+    "/v1/audit": {
+      "get": {
+        "operationId": "listAuditRecords",
+        "responses": { "200": { "description": "Audit ledger", "content": { "application/json": { "schema": { "type": "array", "items": { "$ref": "./schemas/audit-record.schema.json" } } } } } }
+      },
+      "post": {
+        "operationId": "recordAudit",
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object", "required": ["requestId", "type", "message"], "properties": { "requestId": { "type": "string" }, "actor": { "type": "string" }, "type": { "type": "string" }, "message": { "type": "string" }, "tone": { "enum": ["info", "success", "warning", "danger"] }, "taskId": { "type": "string" }, "metadata": { "type": "object" } } } } } },
+        "responses": { "201": { "description": "Audit record", "content": { "application/json": { "schema": { "$ref": "./schemas/audit-record.schema.json" } } } } }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "parameters": {
+      "TaskId": {
+        "name": "taskId",
+        "in": "path",
+        "required": true,
+        "schema": { "type": "string", "minLength": 1 }
+      },
+      "ProfileId": {
+        "name": "profileId",
+        "in": "path",
+        "required": true,
+        "schema": { "type": "string", "minLength": 1 }
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Request did not satisfy the selected profile or contract"
+      },
+      "NotFound": {
+        "description": "Requested resource does not exist"
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mcp-2099.local/contracts/agent-platform/v1/agent-event.schema.json",
+  "title": "AgentEvent",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "sequence", "taskId", "occurredAt", "type", "payload"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "sequence": { "type": "integer", "minimum": 1 },
+    "taskId": { "type": "string", "minLength": 1 },
+    "occurredAt": { "type": "string", "format": "date-time" },
+    "type": {
+      "enum": [
+        "task.created",
+        "task.status_changed",
+        "agent.started",
+        "agent.progressed",
+        "agent.completed",
+        "agent.failed",
+        "approval.required",
+        "result.ready"
+      ]
+    },
+    "payload": { "type": "object", "additionalProperties": true }
+  }
+}

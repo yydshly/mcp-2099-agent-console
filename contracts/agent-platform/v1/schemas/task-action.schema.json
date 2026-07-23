@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mcp-2099.local/contracts/agent-platform/v1/task-action.schema.json",
+  "title": "TaskActionCommand",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["requestId", "action"],
+  "properties": {
+    "requestId": { "type": "string", "minLength": 1 },
+    "action": { "enum": ["approve", "reject", "cancel", "retry", "pause", "resume", "reprioritize"] },
+    "queuePosition": { "type": "integer", "minimum": 0 },
+    "reason": { "type": "string", "maxLength": 2000 }
+  }
+}

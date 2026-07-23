@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mcp-2099.local/contracts/agent-platform/v1/task-request.schema.json",
+  "title": "CreateTaskCommand",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["requestId", "profileId", "input"],
+  "properties": {
+    "requestId": { "type": "string", "minLength": 1 },
+    "profileId": { "type": "string", "minLength": 1 },
+    "workflowId": { "type": "string", "minLength": 1 },
+    "input": { "type": "object", "additionalProperties": true },
+    "options": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "priority": { "enum": ["standard", "high", "urgent"] },
+        "approvalPolicy": { "enum": ["auto", "required"] }
+      }
+    }
+  }
+}

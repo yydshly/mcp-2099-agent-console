@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mcp-2099.local/contracts/agent-platform/v1/queue-action.schema.json",
+  "title": "QueueActionCommand",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["requestId", "action"],
+  "properties": {
+    "requestId": { "type": "string", "minLength": 1 },
+    "action": { "enum": ["pause", "resume"] }
+  }
+}

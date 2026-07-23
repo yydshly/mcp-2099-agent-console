@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mcp-2099.local/contracts/agent-platform/v1/queue-snapshot.schema.json",
+  "title": "QueueSnapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["paused", "tasks", "updatedAt"],
+  "properties": {
+    "paused": { "type": "boolean" },
+    "tasks": { "type": "array", "items": { "$ref": "task-snapshot.schema.json" } },
+    "updatedAt": { "type": "string", "format": "date-time" }
+  }
+}
