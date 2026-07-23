@@ -28,7 +28,7 @@ Identify entry
 → evaluate stage exit
 ```
 
-Load [the design contract](references/design-contract.md) at intake and [the workflow stages](references/workflow-stages.md) before selecting work. Load [browser evidence](references/browser-evidence.md) whenever the page can run; it is planned but deferred in this stage. Load [refinement records](references/refinement-record.md) before changing a visible or interactive defect; it is planned but deferred. Load [adjacent-surface checks](references/adjacent-regression.md) after an intervention; it is planned but deferred. Load [stop and defer guidance](references/stop-defer.md) when evidence is exhausted or a gate blocks progress; it is planned but deferred.
+Load [the design contract](references/design-contract.md) at intake for every entry mode, and load [the workflow stages](references/workflow-stages.md) before selecting or exiting a stage. Load [visual calibration](references/visual-calibration.md) for visual decisions in Stages 2 and 3. Load [the browser refinement loop](references/browser-refinement-loop.md) whenever a runnable surface needs browser evidence, an interaction check, or a refinement decision. Load [the cross-surface matrix](references/cross-surface-matrix.md) for adjacent checks and for Stage 7 coverage. Load [delivery and handoff](references/delivery-handoff.md) when evaluating Stage 9, stopping work, or preparing a handoff.
 
 ## Hard gates
 

@@ -22,15 +22,15 @@ Use one active stage at a time. A stage advances only when its exit condition is
 
 **Purpose:** Establish the starting behavior before refinement.
 
-**Required inputs:** Design contract, runnable surface or documented runtime block.
+**Required inputs:** Design contract, runnable surface or documented reproducible environment block.
 
-**Actions:** Run the page through an allowed route, capture baseline browser evidence, and record blocking conditions if it cannot run.
+**Actions:** For reference-led and brief-led pages, create or restore a browser-accessible route with the contract's primary regions and minimum interaction loop before capturing baseline evidence. For repair-led pages, restore the existing target route, primary regions, and minimum interaction loop before capturing the unedited browser baseline. Run the page through an allowed route and record a reproducible environment block if this baseline cannot be created or restored.
 
 **Evidence:** Browser capture, DOM/state observation, or an explicit reproducible runtime block.
 
 **Required output:** Baseline record and named next stage or verification defer.
 
-**Exit condition:** A runnable baseline is preserved, or the run block is formally the highest-priority unresolved item.
+**Exit condition:** A browser-accessible baseline with a working route, primary regions, and minimum interaction loop is preserved, unless a reproducible environment block formally prevents it and is the highest-priority unresolved item.
 
 **Adjacent regression:** Confirm the chosen run route does not mask the target surface or state.
 
@@ -122,7 +122,7 @@ Use one active stage at a time. A stage advances only when its exit condition is
 
 **Actions:** Inspect each required surface, prioritize the highest-impact observed defect, apply a minimal adaptation, and re-check it.
 
-**Evidence:** Browser evidence for each required viewport or input surface.
+**Evidence:** Browser evidence for each required viewport or input surface, including the applicable Full Delivery Matrix checks from the cross-surface matrix and its keyboard/accessibility row.
 
 **Required output:** Cross-surface coverage record with unresolved items named.
 

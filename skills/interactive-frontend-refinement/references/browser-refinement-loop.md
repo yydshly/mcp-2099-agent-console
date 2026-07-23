@@ -31,7 +31,7 @@ Observed result:
 Decision:
 ```
 
-Name the current stage and its exit condition. The decision must be one of: continue to a named unresolved item, accept the stage exit, or defer with the missing evidence and next evidence source.
+Name the current stage and its exit condition. The decision vocabulary is exactly `pass`, `continue`, `defer`, or `blocked`. Use `pass` only when the active stage exit is evidenced. Use `continue` for a named unresolved item in the current stage. Use `defer` only for non-blocking work that lacks an acceptance criterion, new evidence, performance data, or a user-observable defect; record the missing evidence and next evidence source. Use `blocked` when a reproducible environment or browser route prevents required browser evidence; record the failed route or environment condition and keep visual or interaction verification pending.
 
 ## Resolve in priority order
 
@@ -55,13 +55,13 @@ Within the current stage, use observed severity and user impact to order items a
 2. State the causal hypothesis and the narrowest intervention that can disprove or correct it.
 3. Apply only that intervention; preserve the design contract and existing working behavior.
 4. Reproduce the original path and inspect the declared adjacent regression surfaces, such as a nearby layout, alternate theme, viewport, keyboard path, locale, or fallback.
-5. Record the observed result, decide whether the stage exit is met, and either defer or select the next unresolved item.
+5. Record the observed result and select `pass`, `continue`, `defer`, or `blocked` according to the ledger definitions.
 
 `Continue` selects the highest-priority unresolved item in the current stage. It does not restart the stage, expand scope, or choose optional polish without new evidence.
 
 ## Browser availability gate
 
-If the page can run but a browser route is blocked, try an allowed route that can produce real evidence. If browser access is unavailable, record the environment and the failed or unavailable route in the ledger. Visual and interaction verification remains pending; do not claim visual or interaction completion. Defer work when no new evidence, acceptance criterion, performance data, or user-observable defect is available.
+If the page can run but a browser route is blocked, try an allowed route that can produce real evidence. If browser access is unavailable, record the environment and the failed or unavailable route in the ledger with the `blocked` decision. Visual and interaction verification remains pending; do not claim visual or interaction completion. A `defer` decision is different: use it only for non-blocking work that lacks new evidence, an acceptance criterion, performance data, or a user-observable defect, and record what would make it actionable.
 
 ## Compact repair example: light-theme contrast
 
@@ -73,4 +73,4 @@ If the page can run but a browser route is blocked, try an allowed route that ca
 
 **Adjacent regression surfaces:** Check the same helper text in dark theme, disabled controls that use the token family, narrow layout wrapping, and focus-visible states.
 
-**Decision:** Accept only after the browser confirms readable contrast in both theme directions; otherwise continue with the highest-priority unresolved theme failure.
+**Decision:** `continue` with the highest-priority unresolved theme failure until the browser confirms readable contrast in both theme directions; then record `pass`.

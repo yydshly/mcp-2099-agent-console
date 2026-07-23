@@ -43,6 +43,7 @@ interaction claims.
 | Viewport | Desktop/tablet/mobile maintain the intended journey without clipping, overlap, or inaccessible controls | Browser screenshots at representative widths |
 | State | Primary states show correct content and controls, including loading, empty, error, and success where applicable | State-by-state browser observations |
 | Foreground | Open/close/Escape/focus work for dialogs, menus, popovers, and other foreground layers | Browser interaction evidence, including focus return |
+| Keyboard and accessibility | The declared journey is keyboard reachable in a logical focus order, shows a visible focus indicator, and each control or operation has semantic behavior | Stage 7 browser evidence: reproduced keyboard journey, observed focus order and visible focus, plus semantic operation evidence |
 | Locale | Locale and control width accommodate translated labels, formatted values, and input affordances | Locale screenshot and measured/witnessed width behavior |
 | Motion | Reduced motion removes or replaces nonessential motion without hiding information | Browser or OS preference evidence |
 | Capability | Capability fallback remains usable when the enhanced API, media, or rendering path is unavailable | Browser/devtools evidence of an operable fallback when runnable; otherwise mark verification pending. Documentation may record an environment boundary, never completion evidence. |
