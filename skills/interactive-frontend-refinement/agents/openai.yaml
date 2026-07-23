@@ -1,0 +1,4 @@
+interface:
+  display_name: "Interactive Frontend Refinement"
+  short_description: "Stage-gated browser-led frontend delivery workflow"
+  default_prompt: "Use $interactive-frontend-refinement to turn this frontend request into a browser-verified, polished delivery."
