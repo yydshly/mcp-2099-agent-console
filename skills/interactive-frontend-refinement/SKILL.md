@@ -33,7 +33,7 @@ Load [the design contract](references/design-contract.md) at intake for every en
 ## Hard gates
 
 - **Runnable baseline:** Before broad polish or a completion claim, establish and preserve a runnable baseline when the environment permits it. If it cannot run, treat that as the highest-priority unresolved item.
-- **Browser evidence:** When the page can run, gather real browser evidence for the active visual or interaction claim before declaring it complete. A blocked browser route requires an allowed alternative or an explicit unverified defer, never a readiness claim.
+- **Browser evidence:** When the page can run, gather real browser evidence for the active visual or interaction claim before declaring it complete. A blocked browser route requires an allowed alternative or a `blocked` ledger decision that retains the unverified handoff, never a readiness claim. Reserve `defer` for the non-blocking no-evidence condition defined in the browser refinement ledger.
 - **Current-stage progress:** Name the current stage, its required evidence, and its exit condition. `continue` advances the highest-priority unresolved item in that stage, not unrelated feature work.
 - **Stop or defer:** Stop and defer when there is no new evidence, acceptance criterion, performance data, or user-observable defect. Record what is unverified, why, and the next evidence needed; do not speculate.
 
